@@ -7,24 +7,20 @@ interface IButtonProps {
 
 const Button = (props: IButtonProps) => {
   const onClick = React.useCallback(() => {
+    // Props will always change so they need to be part of the callback
     if (props.value === true) {
       console.log("props");
     }
-  }, [props.value]);
-
-  React.useEffect(() => {
-    props.value = true;
-    console.log(props.value);
   }, [props.value]);
 
   return <button onClick={onClick}>Button Component</button>;
 };
 
 export default function App() {
-  // State
+  // State will always change so they need to be part of the callback
   const [value, setValue] = React.useState(10);
 
-  // Internal State
+  // Internal State doesn't change si it doesn't need to be added to the callback
   const { current: internalState } = React.useRef({
     value: 10
   });
